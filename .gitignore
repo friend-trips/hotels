@@ -1,0 +1,6 @@
+node_modules
+.eslintrc.js
+coverage
+.vscode
+# misc
+.DS_Store
