@@ -21,6 +21,7 @@ export default class SearchBar extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.filterData = this.filterData.bind(this);
   }
 
   handleChange(event) {
@@ -29,10 +30,25 @@ export default class SearchBar extends React.Component {
     this.setState({ [stateName]: event.target.value });
   }
 
+  // get only the data we want from the api result
+  filterData(arr) {
+    return arr.map((result) => {
+      const filteredResult = {};
+      const address = result[hotel[address[lines[0]]]];
+      //   result[hotel[address[lines[0]]]] +
+      //   result[postalCode] +
+      //   result[cityName] +
+      //   result[countryCode];
+      filteredResult[address] = address;
+      return filteredResult;
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     // console.log(this.props.displaySearchFeed(["a", "b"]));
     const displaySearchFeed = this.props.displaySearchFeed;
+    const filterData = this.filterData;
 
     amadeus.shopping.hotelOffers
       .get({
@@ -44,7 +60,7 @@ export default class SearchBar extends React.Component {
       })
       .then(function (response) {
         console.log(response.data);
-        displaySearchFeed(response.data);
+        displaySearchFeed(filterData(response.data));
       })
       .catch(function (response) {
         console.log(response);
