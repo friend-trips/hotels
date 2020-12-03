@@ -34,15 +34,17 @@ export default class SearchBar extends React.Component {
   filterData(arr) {
     const newArr = arr.map((result) => {
       const filteredResult = {};
-      // console.log(result["hotel"]);
-      const address = result["hotel"]["address"]["lines"][0];
-      // const address = result["hotel"["address"["lines"[0]]]];
-
-      //   result[hotel[address[lines[0]]]] +
-      //   result[postalCode] +
-      //   result[cityName] +
-      //   result[countryCode];
-      filteredResult[address] = address;
+      const postalCode = result["hotel"]["address"]["postalCode"]
+        ? " " + result["hotel"]["address"]["postalCode"]
+        : "";
+      const address =
+        result["hotel"]["address"]["lines"][0] +
+        " " +
+        result["hotel"]["address"]["cityName"] +
+        " " +
+        result["hotel"]["address"]["countryCode"] +
+        postalCode;
+      filteredResult["address"] = address;
       return filteredResult;
     });
     console.log("this is the new arr", newArr);
