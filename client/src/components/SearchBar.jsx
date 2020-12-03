@@ -32,9 +32,12 @@ export default class SearchBar extends React.Component {
 
   // get only the data we want from the api result
   filterData(arr) {
-    return arr.map((result) => {
+    const newArr = arr.map((result) => {
       const filteredResult = {};
-      const address = result[hotel[address[lines[0]]]];
+      // console.log(result["hotel"]);
+      const address = result["hotel"]["address"]["lines"][0];
+      // const address = result["hotel"["address"["lines"[0]]]];
+
       //   result[hotel[address[lines[0]]]] +
       //   result[postalCode] +
       //   result[cityName] +
@@ -42,6 +45,8 @@ export default class SearchBar extends React.Component {
       filteredResult[address] = address;
       return filteredResult;
     });
+    console.log("this is the new arr", newArr);
+    return newArr;
   }
 
   handleSubmit(event) {
