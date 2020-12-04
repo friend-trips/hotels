@@ -98,12 +98,18 @@ export default class SearchBar extends React.Component {
     event.preventDefault();
     const displaySearchFeed = this.props.displaySearchFeed;
     const filterData = this.filterData;
+    const state = this.state;
 
+    // for the demo, we are not sending the roomQuantity or adult fields to the api since most hotels do not have offers during this time.
+    // instead, we will calculate the price based on the searchBar inputs and calculate price manually
+    // console.log(state.cityCode);
+    // console.log(state.checkInDate);
+    // console.log(state.checkOutDate);
     amadeus.shopping.hotelOffers
       .get({
-        cityCode: "PAR",
-        checkInDate: "2021-01-21",
-        checkOutDate: "2021-01-23",
+        cityCode: state.cityCode,
+        checkInDate: state.checkInDate,
+        checkOutDate: state.checkOutDate,
         radius: "50",
         includeClosed: "true",
       })
@@ -114,6 +120,21 @@ export default class SearchBar extends React.Component {
       .catch(function (response) {
         console.log(response);
       });
+    // amadeus.shopping.hotelOffers
+    //   .get({
+    //     cityCode: "PAR",
+    //     checkInDate: "2021-01-21",
+    //     checkOutDate: "2021-01-23",
+    //     radius: "50",
+    //     includeClosed: "true",
+    //   })
+    //   .then(function (response) {
+    //     console.log(response.data);
+    //     displaySearchFeed(filterData(response.data));
+    //   })
+    //   .catch(function (response) {
+    //     console.log(response);
+    //   });
   }
 
   render() {
