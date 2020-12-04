@@ -8,6 +8,35 @@ var amadeus = new Amadeus({
 
 const roomNumChoices = [1, 2, 3, 4, 5, 6];
 const adultNumChoices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// random room prices (by number of rooms)
+Array.from({ length: 40 }, () => Math.floor(Math.random() * 40));
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+// nightly price
+const ROOM_PRICES = Array.from({ length: 40 }, () =>
+  getRandomIntInclusive(44, 135)
+);
+// const ROOM_2_PRICES = Array.from({ length: 40 }, () =>
+//   getRandomIntInclusive(198, 615)
+// );
+// const ROOM_3_PRICES = Array.from({ length: 40 }, () =>
+//   getRandomIntInclusive(298, 910)
+// );
+// const ROOM_4_PRICES = Array.from({ length: 40 }, () =>
+//   getRandomIntInclusive(493, 1210)
+// );
+// const ROOM_5_PRICES = Array.from({ length: 40 }, () =>
+//   getRandomIntInclusive(641, 1515)
+// );
+// const ROOM_6_PRICES = Array.from({ length: 40 }, () =>
+//   getRandomIntInclusive(641, 1515)
+// );
+// const ROOM_PRICES = {
+//   1: Math.ran,
+// };
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -34,6 +63,11 @@ export default class SearchBar extends React.Component {
   filterData(arr) {
     const newArr = arr.map((result) => {
       const filteredResult = {};
+      // store the hotelId
+      filteredResult["hotelId"] = result["hotel"]["hotelId"];
+      // store the name
+      filteredResult["name"] = result["hotel"]["name"];
+      // store the location
       const postalCode = result["hotel"]["address"]["postalCode"]
         ? " " + result["hotel"]["address"]["postalCode"]
         : "";
@@ -45,8 +79,13 @@ export default class SearchBar extends React.Component {
         result["hotel"]["address"]["countryCode"] +
         postalCode;
       filteredResult["address"] = address;
+      // store the hotel rating
+      filteredResult["rating"] = result["hotel"]["rating"];
+      // store the hotel amenities
+      filteredResult["amenities"] = result["hotel"]["amenities"];
       return filteredResult;
     });
+
     console.log("this is the new arr", newArr);
     return newArr;
   }
