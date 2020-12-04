@@ -1,12 +1,14 @@
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
+const cors = require("cors");
 const PORT = 3000;
 
 // middleware
 app.use(express.static(__dirname + "/../client/public"));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(cors());
 
 // route
 app.post("/registration", function (req, res) {

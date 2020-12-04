@@ -12,6 +12,7 @@ export default class App extends React.Component {
   displaySearchFeed(data) {
     this.setState({ searchResults: data });
   }
+
   render() {
     return <SearchBar displaySearchFeed={this.displaySearchFeed} />;
   }
