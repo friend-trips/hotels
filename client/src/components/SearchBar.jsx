@@ -8,8 +8,7 @@ var amadeus = new Amadeus({
 
 const roomNumChoices = [1, 2, 3, 4, 5, 6];
 const adultNumChoices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// random room prices (by number of rooms)
-Array.from({ length: 40 }, () => Math.floor(Math.random() * 40));
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -28,8 +27,12 @@ function calculateNumberOfNights(checkInDate, checkOutDate) {
   checkOutDate[1] -= 1;
   checkInDate[1] -= 1;
 
-  const checkOutNum = new Date(checkOutDate);
-  const checkInNum = new Date(checkInDate);
+  const checkOutNum = new Date(
+    checkOutDate[0],
+    checkOutDate[1],
+    checkOutDate[2]
+  );
+  const checkInNum = new Date(checkInDate[0], checkInDate[1], checkInDate[2]);
   const difference = checkOutNum.getTime() - checkInNum.getTime();
   return difference / (1000 * 60 * 60 * 24);
 }
@@ -51,7 +54,6 @@ export default class SearchBar extends React.Component {
 
   handleChange(event) {
     const stateName = event.target.name;
-    // console.log(stateName);
     this.setState({ [stateName]: event.target.value });
   }
 
@@ -80,12 +82,14 @@ export default class SearchBar extends React.Component {
       filteredResult["amenities"] = result["hotel"]["amenities"];
       // store the hotel total cost (roomQuantity * nightly price * number of Nights )
       filteredResult["Price"] = Math.floor(
-        this.state.roomQuantity *
-          ROOM_PRICES[Math.floor(Math.random() * ROOM_PRICES.length)] *
-          calculateNumberOfNights(
-            this.state.checkInDate,
-            this.state.checkOutDate
-          )
+        Number(
+          this.state.roomQuantity *
+            ROOM_PRICES[Math.floor(Math.random() * ROOM_PRICES.length)] *
+            calculateNumberOfNights(
+              this.state.checkInDate,
+              this.state.checkOutDate
+            )
+        )
       );
       return filteredResult;
     });
@@ -102,9 +106,6 @@ export default class SearchBar extends React.Component {
 
     // for the demo, we are not sending the roomQuantity or adult fields to the api since most hotels do not have offers during this time.
     // instead, we will calculate the price based on the searchBar inputs and calculate price manually
-    // console.log(state.cityCode);
-    // console.log(state.checkInDate);
-    // console.log(state.checkOutDate);
     amadeus.shopping.hotelOffers
       .get({
         cityCode: state.cityCode,
@@ -120,21 +121,6 @@ export default class SearchBar extends React.Component {
       .catch(function (response) {
         console.log(response);
       });
-    // amadeus.shopping.hotelOffers
-    //   .get({
-    //     cityCode: "PAR",
-    //     checkInDate: "2021-01-21",
-    //     checkOutDate: "2021-01-23",
-    //     radius: "50",
-    //     includeClosed: "true",
-    //   })
-    //   .then(function (response) {
-    //     console.log(response.data);
-    //     displaySearchFeed(filterData(response.data));
-    //   })
-    //   .catch(function (response) {
-    //     console.log(response);
-    //   });
   }
 
   render() {
