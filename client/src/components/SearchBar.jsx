@@ -19,6 +19,18 @@ function getRandomIntInclusive(min, max) {
 const ROOM_PRICES = Array.from({ length: 40 }, () =>
   getRandomIntInclusive(44, 135)
 );
+
+// calculate the number of nights from checkInDate and checkOutDate (month is 0-indexed)
+function calculateNumberOfNights(checkInDate, checkOutDate) {
+  checkOutDate = checkOutDate.split("-").map((num) => Number(num));
+  checkInDate = checkInDate.split("-").map((num) => Number(num));
+
+  const checkOutNum = new Date(checkOutDate);
+  const checkInNum = new Date(checkInDate);
+  const difference = checkOutNum.getTime() - checkInNum.getTime();
+  return difference / (1000 * 60 * 60 * 24);
+}
+
 // const ROOM_2_PRICES = Array.from({ length: 40 }, () =>
 //   getRandomIntInclusive(198, 615)
 // );
@@ -79,10 +91,20 @@ export default class SearchBar extends React.Component {
         result["hotel"]["address"]["countryCode"] +
         postalCode;
       filteredResult["address"] = address;
-      // store the hotel rating
       filteredResult["rating"] = result["hotel"]["rating"];
       // store the hotel amenities
       filteredResult["amenities"] = result["hotel"]["amenities"];
+      // store the hotel total cost (roomQuantity * number of Nights * nightly price)
+      // "Use Math.random() function to get the random number between(0-1, 1 exclusive).
+      // Multiply it by the array length to get the numbers between(0-arrayLength).
+      // Use Math.floor() to get the index ranging from(0 to arrayLength-1)."
+      filteredResult["Price"] =
+        this.state.roomQuantity *
+        ROOM_PRICES[Math.floor(Math.random() * ROOM_PRICES.length)] *
+        calculateNumberOfNights(
+          this.state.checkInDate,
+          this.state.checkOutDate
+        );
       return filteredResult;
     });
 
