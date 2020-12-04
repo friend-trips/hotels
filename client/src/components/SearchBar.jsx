@@ -24,31 +24,15 @@ const ROOM_PRICES = Array.from({ length: 40 }, () =>
 function calculateNumberOfNights(checkInDate, checkOutDate) {
   checkOutDate = checkOutDate.split("-").map((num) => Number(num));
   checkInDate = checkInDate.split("-").map((num) => Number(num));
+  // month is 0-indexed
+  checkOutDate[1] -= 1;
+  checkInDate[1] -= 1;
 
   const checkOutNum = new Date(checkOutDate);
   const checkInNum = new Date(checkInDate);
   const difference = checkOutNum.getTime() - checkInNum.getTime();
   return difference / (1000 * 60 * 60 * 24);
 }
-
-// const ROOM_2_PRICES = Array.from({ length: 40 }, () =>
-//   getRandomIntInclusive(198, 615)
-// );
-// const ROOM_3_PRICES = Array.from({ length: 40 }, () =>
-//   getRandomIntInclusive(298, 910)
-// );
-// const ROOM_4_PRICES = Array.from({ length: 40 }, () =>
-//   getRandomIntInclusive(493, 1210)
-// );
-// const ROOM_5_PRICES = Array.from({ length: 40 }, () =>
-//   getRandomIntInclusive(641, 1515)
-// );
-// const ROOM_6_PRICES = Array.from({ length: 40 }, () =>
-//   getRandomIntInclusive(641, 1515)
-// );
-// const ROOM_PRICES = {
-//   1: Math.ran,
-// };
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -94,17 +78,15 @@ export default class SearchBar extends React.Component {
       filteredResult["rating"] = result["hotel"]["rating"];
       // store the hotel amenities
       filteredResult["amenities"] = result["hotel"]["amenities"];
-      // store the hotel total cost (roomQuantity * number of Nights * nightly price)
-      // "Use Math.random() function to get the random number between(0-1, 1 exclusive).
-      // Multiply it by the array length to get the numbers between(0-arrayLength).
-      // Use Math.floor() to get the index ranging from(0 to arrayLength-1)."
-      filteredResult["Price"] =
+      // store the hotel total cost (roomQuantity * nightly price * number of Nights )
+      filteredResult["Price"] = Math.floor(
         this.state.roomQuantity *
-        ROOM_PRICES[Math.floor(Math.random() * ROOM_PRICES.length)] *
-        calculateNumberOfNights(
-          this.state.checkInDate,
-          this.state.checkOutDate
-        );
+          ROOM_PRICES[Math.floor(Math.random() * ROOM_PRICES.length)] *
+          calculateNumberOfNights(
+            this.state.checkInDate,
+            this.state.checkOutDate
+          )
+      );
       return filteredResult;
     });
 
@@ -114,7 +96,6 @@ export default class SearchBar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // console.log(this.props.displaySearchFeed(["a", "b"]));
     const displaySearchFeed = this.props.displaySearchFeed;
     const filterData = this.filterData;
 
@@ -132,7 +113,6 @@ export default class SearchBar extends React.Component {
       })
       .catch(function (response) {
         console.log(response);
-        // reject(new Error(errorThrown));
       });
   }
 
