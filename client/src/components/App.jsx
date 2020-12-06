@@ -46,7 +46,7 @@ export default class App extends React.Component {
     return (
       <Wrapper>
         <SearchBar displaySearchFeed={this.displaySearchFeed} />
-        <SearchResults />
+        <SearchResults searchResults={this.state.searchResults} />
       </Wrapper>
     );
   }
