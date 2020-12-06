@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
+const StyledForm = styled.form`
+  background-color: red;
+`;
 
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
@@ -125,7 +130,7 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <StyledForm onSubmit={this.handleSubmit}>
         <label>
           <input
             name="cityCode"
@@ -184,7 +189,7 @@ export default class SearchBar extends React.Component {
           </select>
         </label>
         <input type="submit" value="Search" />
-      </form>
+      </StyledForm>
     );
   }
 }
