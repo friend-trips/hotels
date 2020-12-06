@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar.jsx";
-import SearchResults from "./SearchResults.jsx";
+import HotelPageContent from "./HotelPageContent.jsx";
 import styled from "styled-components";
 import "./App.css";
 
@@ -37,6 +37,7 @@ export default class App extends React.Component {
   }
 
   displaySearchFeed(data) {
+    console.log("state set");
     this.setState({
       searchResults: data,
     });
@@ -46,7 +47,7 @@ export default class App extends React.Component {
     return (
       <Wrapper>
         <SearchBar displaySearchFeed={this.displaySearchFeed} />
-        <SearchResults searchResults={this.state.searchResults} />
+        <HotelPageContent searchResults={this.state.searchResults} />
       </Wrapper>
     );
   }

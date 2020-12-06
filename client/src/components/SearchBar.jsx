@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
-  background-color: red;
+  border-color: red;
+  border-style: solid;
+  border-width: 2px;
 `;
 
 var Amadeus = require("amadeus");
