@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const TopRow = styled.div`
   display: flex;
+  margin-bottom: 0.4%;
 `;
 
 const StyledLabelClass = styled.label`
