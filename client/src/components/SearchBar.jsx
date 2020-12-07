@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { DateRangeInput } from "@datepicker-react/styled";
 import styled from "styled-components";
+import moment from "moment";
 
 const Wrapper = styled.div`
   margin-top: 2%;
