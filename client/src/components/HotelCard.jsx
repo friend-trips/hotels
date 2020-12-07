@@ -111,15 +111,15 @@ const PriceInfo = styled.p`
 `
 const Save = styled.div`
   position: absolute;
-  height: 5%;
-  width: 5%;
+  height: 8%;
+  width: 8%;
   right: 10%;
   top: 10%;
 `;
 const Suggest = styled.div`
   position: absolute;
-  height: 5%;
-  width: 5%;
+  height: 8%;
+  width: 8%;
   right: 10%;
   bottom: 10%;
 `;
