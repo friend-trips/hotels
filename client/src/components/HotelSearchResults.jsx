@@ -27,7 +27,7 @@ export default function SearchResults(props) {
       <FeedContainer>
         {props.searchResults.length > 0
           ? props.searchResults.map((data, index) => {
-              return <HotelCard key={index} HotelData={data} />;
+              return <HotelCard key={index} HotelData={data} cityCode={props.cityCode} checkInDate={props.checkInDate} checkOutDate={props.checkOutDate} roomQuantity={props.roomQuantity} adults={props.adults}/>;
             })
           : null}
       </FeedContainer>

@@ -128,7 +128,56 @@ const Suggest = styled.div`
 
 const ratingStrings = ['none', 'Poor', 'Fair', 'Good', 'Great', 'Excellent']
 
-export default function HotelCard({ HotelData, numOfNights }) {
+export default function HotelCard({ HotelData, cityCode, checkInDate, checkOutDate, roomQuantity, adults }) {
+  const numOfNights = HotelData["numOfNights"];
+
+  const save = function(isSuggested) {
+    const hotelData = {
+      "trip_id": 1,
+      "user_id": 1,
+      "check_in_date": checkInDate,
+      "check_out_date": checkOutDate,
+      "room_quanity": roomQuantity,
+      "adults": adults,
+      "hotel_name": HotelData.name,
+      "hotel_address": HotelData.address,
+      "city_code": cityCode,
+      "rating": HotelData.rating ? HotelData.rating : 5,
+      "amenities": "amenities",
+      "price": 1,
+      "distance_from_city_center": HotelData.milesFromCenter,
+      "is_suggested": isSuggested ? "true" : "false",
+      "is_saved": "true",
+
+      "number_of_reviews": 1,
+      "number_of_ratings": 1,
+      "overall_ratings": 1,
+      "sleep_quality_rating": 1,
+      "service_rating": 1,
+      "facilities_rating": 1,
+      "room_comforts_rating": 1,
+      "value_for_money_rating": 1,
+      "catering_rating": 1,
+      "location_rating": 1,
+      "points_of_interest_rating": 1,
+      "staff_rating": 1
+    }
+
+    console.log(hotelData);
+
+    axios({
+      method: 'post',
+      url: 'http://morning-bayou-59969.herokuapp.com/hotels',
+      data: hotelData,
+      header: {'Access-Control-Allow-Origin': '*'}
+    })
+      .then((data) => {
+        console.log(data,"data from HotelCard.jsx");
+        // getNewSavedResult(data.data);
+      })
+      .catch(console.log)
+  }
+
   if (!numOfNights) {
     numOfNights = 4;
   }

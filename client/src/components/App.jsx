@@ -105,6 +105,8 @@ export default class App extends React.Component {
             )
         )
       );
+      filteredResult["numOfNights"] = calculateNumberOfNights(this.state.checkInDate, this.state.checkOutDate);
+      filteredResult["milesFromCenter"] = result["hotel"]["hotelDistance"]["distance"];
       return filteredResult;
     });
 
@@ -132,8 +134,10 @@ export default class App extends React.Component {
         cityCode: cityCode,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        radius: "50",
+        radius: "15",
+        radiusUnit: "MILE",
         includeClosed: "true",
+        currency: "USD"
       })
       .then(function (response) {
         console.log(response.data);
@@ -148,8 +152,14 @@ export default class App extends React.Component {
     return (
       <Wrapper>
         <SearchBar searchForHotels={this.searchForHotels} />
-        <HotelPageContent searchResults={this.state.searchResults} />
+        <HotelPageContent searchResults={this.state.searchResults} cityCode={this.state.cityCode} checkInDate={this.state.checkInDate} checkOutDate={this.state.checkOutDate} roomQuantity={this.state.roomQuantity} adults={this.state.adults}/>
       </Wrapper>
     );
   }
 }
+
+// cityCode: "",
+// checkInDate: "",
+// checkOutDate: "",
+// roomQuantity: 0,
+// adults: 0,

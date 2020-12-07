@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
 const cors = require("cors");
-const PORT = 3000;
+const PORT = 3001;
 
 // middleware
 app.use(express.static(__dirname + "/../client/public"));
@@ -25,6 +25,6 @@ app.post("/registration", function (req, res) {
 });
 
 // start server
-app.listen(3000, function () {
+app.listen(3001, function () {
   console.log(`listening on port: ${PORT}`);
 });
