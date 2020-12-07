@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  margin-top: 2%;
+  margin-bottom: 3%;
+  /* border-color: black; */
+  /* border-style: solid; */
+  /* border-width: 4px; */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 8%;
-
-  margin-bottom: 5%;
-  margin-top: 2%;
-  border-color: black;
-  border-style: solid;
-  border-width: 4px;
+  align-items: center;
 `;
 
 const TopRow = styled.div`
   display: flex;
+  align-items: flex-start;
   margin-bottom: 0.4%;
 `;
 
@@ -226,77 +231,79 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <Container>
-        <TopRow>
-          <StyledLabelClass>
-            Rooms
-            <StyledRoomSelect
-              name="roomQuantity"
-              value={this.state.roomQuantity}
-              onChange={(e) =>
-                this.setState({ [e.target.name]: e.target.value })
-              }
-            >
-              <option>All</option>
-              {roomNumChoices.map((quantity) => (
-                <option key={quantity} value={quantity}>
-                  {quantity}
-                </option>
-              ))}
-            </StyledRoomSelect>
-          </StyledLabelClass>
-          <StyledAdultsLabel>
-            Adults
-            <StyledAdultsSelect
-              name="adults"
-              value={this.state.adults}
-              onChange={(e) =>
-                this.setState({ [e.target.name]: e.target.value })
-              }
-            >
-              <option>All</option>
-              {adultNumChoices.map((quantity) => (
-                <option key={quantity} value={quantity}>
-                  {quantity}
-                </option>
-              ))}
-            </StyledAdultsSelect>
-          </StyledAdultsLabel>
-        </TopRow>
-        <BottomRow>
-          <StyledForm onSubmit={this.handleSubmit}>
-            <label>
-              <StyledInput
-                name="cityCode"
-                type="text"
-                value={this.state.cityCode}
-                onChange={this.handleChange}
-                placeholder={"Destination"}
-              />
-            </label>
-            <label>
-              <StyledInput
-                name="checkInDate"
-                type="text"
-                value={this.state.checkInDate}
-                onChange={this.handleChange}
-                placeholder={"CheckInDate"}
-              />
-            </label>
-            <label>
-              <StyledInput
-                name="checkOutDate"
-                type="text"
-                value={this.state.checkOutDate}
-                onChange={this.handleChange}
-                placeholder={"CheckOutDate"}
-              />
-            </label>
+      <Wrapper>
+        <Container>
+          <TopRow>
+            <StyledLabelClass>
+              Rooms
+              <StyledRoomSelect
+                name="roomQuantity"
+                value={this.state.roomQuantity}
+                onChange={(e) =>
+                  this.setState({ [e.target.name]: e.target.value })
+                }
+              >
+                <option>All</option>
+                {roomNumChoices.map((quantity) => (
+                  <option key={quantity} value={quantity}>
+                    {quantity}
+                  </option>
+                ))}
+              </StyledRoomSelect>
+            </StyledLabelClass>
+            <StyledAdultsLabel>
+              Adults
+              <StyledAdultsSelect
+                name="adults"
+                value={this.state.adults}
+                onChange={(e) =>
+                  this.setState({ [e.target.name]: e.target.value })
+                }
+              >
+                <option>All</option>
+                {adultNumChoices.map((quantity) => (
+                  <option key={quantity} value={quantity}>
+                    {quantity}
+                  </option>
+                ))}
+              </StyledAdultsSelect>
+            </StyledAdultsLabel>
+          </TopRow>
+          <BottomRow>
+            <StyledForm onSubmit={this.handleSubmit}>
+              <label>
+                <StyledInput
+                  name="cityCode"
+                  type="text"
+                  value={this.state.cityCode}
+                  onChange={this.handleChange}
+                  placeholder={"Destination"}
+                />
+              </label>
+              <label>
+                <StyledInput
+                  name="checkInDate"
+                  type="text"
+                  value={this.state.checkInDate}
+                  onChange={this.handleChange}
+                  placeholder={"CheckInDate"}
+                />
+              </label>
+              <label>
+                <StyledInput
+                  name="checkOutDate"
+                  type="text"
+                  value={this.state.checkOutDate}
+                  onChange={this.handleChange}
+                  placeholder={"CheckOutDate"}
+                />
+              </label>
 
-            <StyledSubmit type="submit" value="Search" />
-          </StyledForm>
-        </BottomRow>
-      </Container>
+              <StyledSubmit type="submit" value="Search" />
+            </StyledForm>
+          </BottomRow>
+        </Container>
+      </Wrapper>
     );
   }
 }
