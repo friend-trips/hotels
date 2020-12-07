@@ -115,7 +115,6 @@ export default function HotelCard({ HotelData, numOfNights }) {
   if (!numOfNights) {
     numOfNights = 4;
   }
-  console.log('HOTEL DATA', HotelData)
   let amenities = (HotelData.amenities) ? HotelData.amenities : [];
   amenities = amenities.map((perk) => {
     return perk.replace('_', ' ').toLowerCase();
