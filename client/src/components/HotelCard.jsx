@@ -6,9 +6,7 @@ import imgSrc from "../assets/images/hotel_4.jpeg";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
+  border-bottom: 1px solid black;
   width: 100%;
   position: relative;
 `;
@@ -21,9 +19,6 @@ const HotelImage = styled.img`
   height: 100%;
   width: 100%;
   object-fit: contain;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
 `;
 
 const CenterSection = styled.div`
@@ -52,6 +47,7 @@ const HotelAddress = styled.h5`
   font-weight: 200;
 `;
 const Amenities = styled.div`
+  width: 70%;
   display:flex;
   flex-direction: row;
   align-items: center;
@@ -63,7 +59,7 @@ const AmenitySectionTitle = styled.p`
   padding: 0;
 `
 const AmenitiesInfo = styled.p`
-font-size: 10px;
+  font-size: 10px;
   font-weight: 200;
   padding:0;
   margin: 0;
@@ -75,26 +71,50 @@ const Amenity = styled.p`
   margin: 2px;
   padding: 2px
 `
-const Price = styled.div`
-  width: 25%;
-  border: 1px solid black;
-`;
+
 const Rating = styled.div`
   position: absolute;
-  right: 10px;
+  right: 5%;
+  top: 30%;
   border: 1px solid black;
-  height: 100px;
-  width: 100px;
+  min-height: 50px;
+  width: 20%;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  box-shadow: 2px 2px 2px;
+`;
+
+const PricePane = styled.div`
+  width: 25%;
+  border-left: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: 300;
 `;
+
+const Price = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+`;
+const PriceInfo = styled.p`
+  font-size: 12px;
+  font-weight: 200;
+  padding:0;
+  margin: 0;
+`
+
 
 const ratingStrings = ['none', 'Poor', 'Fair', 'Good', 'Great', 'Excellent']
 
-export default function HotelCard({ HotelData }) {
+export default function HotelCard({ HotelData, numOfNights }) {
+  if (!numOfNights) {
+    numOfNights = 4;
+  }
   console.log('HOTEL DATA', HotelData)
   let amenities = (HotelData.amenities) ? HotelData.amenities : [];
   amenities = amenities.map((perk) => {
@@ -126,11 +146,16 @@ export default function HotelCard({ HotelData }) {
           </> :
           null
         }
-        <Rating>{ratingStrings[HotelData["rating"]]} {HotelData["rating"]}</Rating>
+        {(HotelData.rating) ?
+        <Rating>{HotelData.rating}/5  {ratingStrings[HotelData.rating]}</Rating>:
+        null}
       </CenterSection>
-      <Price>
-        $$$
-      </Price>
+      <PricePane>
+        <Price>
+          ${(HotelData.Price / numOfNights).toFixed(2)}
+          <PriceInfo>Nightly price per room</PriceInfo>
+        </Price>
+      </PricePane>
     </Container>
   );
 }
