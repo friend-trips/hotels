@@ -6,23 +6,8 @@ import "./App.css";
 
 //entire screen
 const Wrapper = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-const Content = styled.div`
-  border: solid 3px;
   display: flex;
-  height: 89%;
-  justify-content: space-between;
-`;
-//^^ height will control size of the bottom section
-// form height and content should add up to equal 1--%
-
-const PreSearchResults = styled.div`
-  border: solid 1px;
-  height: 100%;
-  width: 66%;
-  float: left;
+  flex-direction: column;
 `;
 
 export default class App extends React.Component {

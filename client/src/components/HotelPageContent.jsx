@@ -4,7 +4,6 @@ import HotelSearchResults from "./HotelSearchResults";
 import HotelSuggestions from "./HotelSuggestions";
 
 const ResultsContainer = styled.div`
-  height: 100%;
   display: grid;
   grid-template-columns: 3fr 1fr;
   column-gap: 10%;

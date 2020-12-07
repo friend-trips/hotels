@@ -4,10 +4,8 @@ import styled from "styled-components";
 import imgSrc from "../assets/images/hotel_4.jpeg";
 
 const Container = styled.div`
-  height: 100%;
   display: flex;
   flex-direction: row;
-
   border-color: black;
   border-width: 1px;
   border-style: solid;
@@ -36,7 +34,7 @@ const HotelImage = styled.img`
 export default function HotelCard({ HotelData }) {
   return (
     <Container>
-      <HotelImage src={imgSrc} />
+      {/* <HotelImage src={imgSrc} /> */}
       <CenterSection>{HotelData["name"]}</CenterSection>
       <div>{HotelData["rating"]}</div>
     </Container>
