@@ -26,7 +26,7 @@ const CenterSection = styled.div`
   border: 1px solid #fff;
   flex: 2;
   width: 50%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   padding: 2%;
   position: relative;
@@ -40,7 +40,8 @@ const HotelInfo = styled.div`
 const HotelName = styled.h4`
   margin: 0;
   font-weight: 300;
-  `;
+`;
+
 const HotelAddress = styled.h5`
   margin: 0;
   font-size: 11px;
@@ -57,13 +58,13 @@ const AmenitySectionTitle = styled.p`
   font-size: 12px;
   font-weight: 200;
   padding: 0;
-`
+`;
 const AmenitiesInfo = styled.p`
   font-size: 10px;
   font-weight: 200;
-  padding:0;
+  padding: 0;
   margin: 0;
-`
+`;
 const Amenity = styled.p`
   font-size: 12px;
   font-weight: 200;
@@ -133,8 +134,8 @@ export default function HotelCard({ HotelData, numOfNights }) {
   }
   let amenities = (HotelData.amenities) ? HotelData.amenities : [];
   amenities = amenities.map((perk) => {
-    return perk.replace('_', ' ').toLowerCase();
-  })
+    return perk.replace("_", " ").toLowerCase();
+  });
   return (
     <Container>
       <HotelImageWrapper>
