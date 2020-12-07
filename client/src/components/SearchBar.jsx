@@ -81,7 +81,9 @@ const BottomRow = styled.div`
   display: flex;
 `;
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+  display: flex;
+`;
 
 const StyledInput = styled.input`
   height: 44px;
@@ -206,29 +208,6 @@ export default function SearchBar(props) {
                 placeholder={"Destination"}
               />
             </label>
-
-            {/* <label>
-              <StyledInput
-                name="checkInDate"
-                type="text"
-                value={checkInDate}
-                onChange={(e) => {
-                  handleChange("checkInDate", e);
-                }}
-                placeholder={"CheckInDate"}
-              />
-            </label> */}
-            {/* <label>
-              <StyledInput
-                name="checkOutDate"
-                type="text"
-                value={checkOutDate}
-                onChange={(e) => {
-                  handleChange("checkOutDate", e);
-                }}
-                placeholder={"CheckOutDate"}
-              />
-            </label> */}
             <DateRangeInput
               className="datePicker"
               onDatesChange={(data) => {
