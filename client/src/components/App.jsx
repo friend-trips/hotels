@@ -22,7 +22,7 @@ export default class App extends React.Component {
   }
 
   displaySearchFeed(data) {
-    console.log("state set");
+    console.log("state set ", data);
     this.setState({
       searchResults: data,
     });

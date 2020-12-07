@@ -15,7 +15,7 @@ export default function HotelPageContent(props) {
   return (
     <ResultsContainer>
       <HotelSearchResults searchResults={props.searchResults} />
-      <HotelSuggestions />
+      <HotelSuggestions searchResults={props.searchResults}/>
     </ResultsContainer>
   );
 }

@@ -1,19 +1,25 @@
 import React from "react";
 import styled from "styled-components";
+import OneSuggestion from "./OneSuggestion.jsx";
 
 const Container = styled.div`
-  height: 100%;
-  display: grid;
-  flex: 1;
-  border-color: red;
-  border-width: 1px;
-  border-style: solid;
+  padding: 5px;
+  height: 99%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default function HotelSuggestions(props) {
   return (
     <Container>
       <div>Hotel Suggestions</div>
+      {props.searchResults.length > 0
+        ? props.searchResults.map((data, index) => (
+            <OneSuggestion key={index} data={data}></OneSuggestion>
+          ))
+        : null}
     </Container>
   );
 }

@@ -147,9 +147,9 @@ export default class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityCode: "",
-      checkInDate: "",
-      checkOutDate: "",
+      cityCode: "LON",
+      checkInDate: "2021-02-04",
+      checkOutDate: "2021-02-08",
       roomQuantity: 0,
       adults: 0,
     };
