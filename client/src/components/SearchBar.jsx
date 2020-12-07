@@ -115,8 +115,14 @@ export default function SearchBar(props) {
   const [cityCode, setCityCode] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
+  const [focusedCalendar, setFocusedCalendar] = useState(null);
   const [roomQuantity, setRoomQuantity] = useState("");
   const [adults, setAdults] = useState("");
+
+  const setDates = (data) => {
+    setCheckInDate(data.startDate);
+    setCheckOutDate(data.endDate);
+  };
 
   const handleChange = (field, event) => {
     switch (field) {
@@ -137,10 +143,12 @@ export default function SearchBar(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let startingDate = moment(checkInDate).format("YYYY-MM-DD");
+    let endingDate = moment(checkOutDate).format("YYYY-MM-DD");
     props.searchForHotels(
       cityCode,
-      checkInDate,
-      checkOutDate,
+      startingDate,
+      endingDate,
       roomQuantity,
       adults
     );
@@ -199,7 +207,7 @@ export default function SearchBar(props) {
               />
             </label>
 
-            <label>
+            {/* <label>
               <StyledInput
                 name="checkInDate"
                 type="text"
@@ -209,8 +217,8 @@ export default function SearchBar(props) {
                 }}
                 placeholder={"CheckInDate"}
               />
-            </label>
-            <label>
+            </label> */}
+            {/* <label>
               <StyledInput
                 name="checkOutDate"
                 type="text"
@@ -220,8 +228,18 @@ export default function SearchBar(props) {
                 }}
                 placeholder={"CheckOutDate"}
               />
-            </label>
-
+            </label> */}
+            <DateRangeInput
+              className="datePicker"
+              onDatesChange={(data) => {
+                setDates(data);
+              }}
+              onFocusChange={(focusedInput) => setFocusedCalendar(focusedInput)}
+              startDate={checkInDate} // Date or null
+              endDate={checkOutDate} // Date or null
+              focusedInput={focusedCalendar} // START_DATE, END_DATE or null
+              style="border-width: 100px;"
+            />
             <StyledSubmit type="submit" value="Search" />
           </StyledForm>
         </BottomRow>

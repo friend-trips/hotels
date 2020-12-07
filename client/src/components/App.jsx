@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar.jsx";
 import HotelPageContent from "./HotelPageContent.jsx";
 import styled from "styled-components";
 import "./App.css";
+import moment from "moment";
 
 //entire screen
 const Wrapper = styled.div`
