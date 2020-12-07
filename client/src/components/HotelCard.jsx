@@ -28,7 +28,6 @@ const HotelImage = styled.img`
 const CenterSection = styled.div`
   background-color: #ffffff;
   border: 1px solid #fff;
-  // text-align: center;
   flex: 2;
   width: 50%;
   display:flex;
@@ -51,7 +50,6 @@ const HotelName = styled.h4`
   font-weight: 200;
 `;
 const Amenities = styled.div`
-  // width: 50%;
   display:flex;
   flex-direction: row;
   align-items: center;
@@ -62,7 +60,6 @@ const AmenitySectionTitle = styled.p`
   font-size: 12px;
   font-weight: 200;
   padding: 0;
-  // margin: 0;
 `
 const AmenitiesInfo = styled.p`
 font-size: 10px;
@@ -95,7 +92,7 @@ export default function HotelCard({ HotelData }) {
       </HotelImageWrapper>
       <CenterSection>
         <HotelInfo>
-          <HotelName>{HotelData["name"]}</HotelName>
+          <HotelName>{HotelData.name}</HotelName>
           <HotelAddress>{HotelData.address}</HotelAddress>
         </HotelInfo>
         {(HotelData.amenities) ?
