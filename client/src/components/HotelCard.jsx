@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 // import imgSrc from "./../assets/images/hotel_3.jpeg";
 import imgSrc from "../assets/images/hotel_4.jpeg";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -137,17 +138,17 @@ export default function HotelCard({ HotelData, cityCode, checkInDate, checkOutDa
       "user_id": 1,
       "check_in_date": checkInDate,
       "check_out_date": checkOutDate,
-      "room_quanity": roomQuantity,
-      "adults": adults,
+      "room_quantity": 1,
+      "adults": 1,
       "hotel_name": HotelData.name,
       "hotel_address": HotelData.address,
       "city_code": cityCode,
-      "rating": HotelData.rating ? HotelData.rating : 5,
+      "rating": 5,
       "amenities": "amenities",
       "price": 1,
-      "distance_from_city_center": HotelData.milesFromCenter,
-      "is_suggested": isSuggested ? "true" : "false",
-      "is_saved": "true",
+      "distance_from_city_center": HotelData.milesFromCenter.toString(),
+      // "is_suggested": isSuggested ? "true" : "false",
+      // "is_saved": "true",
 
       "number_of_reviews": 1,
       "number_of_ratings": 1,
@@ -160,7 +161,8 @@ export default function HotelCard({ HotelData, cityCode, checkInDate, checkOutDa
       "catering_rating": 1,
       "location_rating": 1,
       "points_of_interest_rating": 1,
-      "staff_rating": 1
+      "staff_rating": 1,
+      "hotel_id": "abc"
     }
 
     console.log(hotelData);
@@ -216,10 +218,10 @@ export default function HotelCard({ HotelData, cityCode, checkInDate, checkOutDa
           null}
       </CenterSection>
       <PricePane>
-        <Save >
+        <Save onClick={() => save(false)}>
           <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="sc-fzqzlV sc-fzqLLg kCMTKY"><path d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z"></path></svg>
         </Save>
-        <Suggest >
+        <Suggest onClick={() => save(true)}>
           <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="sc-fzqzlV gMJRj"><g vectorEffect="non-scaling-stroke" transform="translate(0,0)scale(1,1)" fill="none" fillRule="evenodd" stroke="#000" strokeWidth="2"><path d="m27 18v9c0 1.1045695-.8954305 2-2 2h-18c-1.1045695 0-2-.8954305-2-2v-9"></path><path d="m4.5 14.5h23z" transform="matrix(0 1 -1 0 30.5 -1.5)"></path><path d="m6 13 9.2928932-9.29289322c.3905243-.39052429 1.0236893-.39052429 1.4142136 0l9.2928932 9.29289322"></path></g></svg>
         </Suggest>
         <Price>
