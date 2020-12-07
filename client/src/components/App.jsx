@@ -111,13 +111,7 @@ export default class App extends React.Component {
     return newArr;
   }
 
-  searchForHotels({
-    cityCode,
-    checkInDate,
-    checkOutDate,
-    roomQuantity,
-    adults,
-  }) {
+  searchForHotels(cityCode, checkInDate, checkOutDate, roomQuantity, adults) {
     event.preventDefault();
     const filterData = this.filterData;
     const setSearchFeed = this.setSearchFeed;
@@ -129,11 +123,9 @@ export default class App extends React.Component {
 
     // for the demo, we are not sending the roomQuantity or adult fields to the api since most hotels do not have offers during this time.
     // instead, we will calculate the price based on the searchBar inputs and calculate price manually
-    console.log("this.state:", this.state);
+    console.log(cityCode);
     console.log(checkInDate);
     console.log(checkOutDate);
-    console.log(roomQuantity);
-    console.log(adults);
     amadeus.shopping.hotelOffers
       .get({
         cityCode: cityCode,

@@ -108,117 +108,124 @@ const StyledSubmit = styled.input`
   margin-top: 0.05em;
 `;
 
-var Amadeus = require("amadeus");
-var amadeus = new Amadeus({
-  clientId: "K6PZSGD27MzELXz7ZmiN1xpsRVgN4R4H",
-  clientSecret: "oW4tFxsTbGApvklU",
-});
-
 const roomNumChoices = [1, 2, 3, 4, 5, 6];
 const adultNumChoices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export default class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cityCode: "",
-      checkInDate: "",
-      checkOutDate: "",
-      roomQuantity: 0,
-      adults: 0,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+export default function SearchBar(props) {
+  const [cityCode, setCityCode] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [roomQuantity, setRoomQuantity] = useState("");
+  const [adults, setAdults] = useState("");
 
-  handleChange(event) {
-    const stateName = event.target.name;
-    this.setState({ [stateName]: event.target.value });
-  }
+  const handleChange = (field, event) => {
+    switch (field) {
+      case "cityCode":
+        return setCityCode(event.target.value);
+      case "checkInDate":
+        return setCheckInDate(event.target.value);
+      case "checkOutDate":
+        return setCheckOutDate(event.target.value);
+      case "roomQuantity":
+        return setRoomQuantity(event.target.value);
+      case "adults":
+        return setRoomQuantity(event.target.value);
+      default:
+        return;
+    }
+  };
 
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const state = this.state;
-    console.log("handleSubmit: ", state);
-    this.props.searchForHotels(state);
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        <Container>
-          <TopRow>
-            <StyledLabelClass>
-              Rooms
-              <StyledRoomSelect
-                name="roomQuantity"
-                value={this.state.roomQuantity}
-                onChange={(e) =>
-                  this.setState({ [e.target.name]: e.target.value })
-                }
-              >
-                <option>All</option>
-                {roomNumChoices.map((quantity) => (
-                  <option key={quantity} value={quantity}>
-                    {quantity}
-                  </option>
-                ))}
-              </StyledRoomSelect>
-            </StyledLabelClass>
-            <StyledAdultsLabel>
-              Adults
-              <StyledAdultsSelect
-                name="adults"
-                value={this.state.adults}
-                onChange={(e) =>
-                  this.setState({ [e.target.name]: e.target.value })
-                }
-              >
-                <option>All</option>
-                {adultNumChoices.map((quantity) => (
-                  <option key={quantity} value={quantity}>
-                    {quantity}
-                  </option>
-                ))}
-              </StyledAdultsSelect>
-            </StyledAdultsLabel>
-          </TopRow>
-          <BottomRow>
-            <StyledForm onSubmit={this.handleSubmit}>
-              <label>
-                <StyledInput
-                  name="cityCode"
-                  type="text"
-                  value={this.state.cityCode}
-                  onChange={this.handleChange}
-                  placeholder={"Destination"}
-                />
-              </label>
-
-              <label>
-                <StyledInput
-                  name="checkInDate"
-                  type="text"
-                  value={this.state.checkInDate}
-                  onChange={this.handleChange}
-                  placeholder={"CheckInDate"}
-                />
-              </label>
-              <label>
-                <StyledInput
-                  name="checkOutDate"
-                  type="text"
-                  value={this.state.checkOutDate}
-                  onChange={this.handleChange}
-                  placeholder={"CheckOutDate"}
-                />
-              </label>
-
-              <StyledSubmit type="submit" value="Search" />
-            </StyledForm>
-          </BottomRow>
-        </Container>
-      </Wrapper>
+    props.searchForHotels(
+      cityCode,
+      checkInDate,
+      checkOutDate,
+      roomQuantity,
+      adults
     );
-  }
+  };
+
+  return (
+    <Wrapper>
+      <Container>
+        <TopRow>
+          <StyledLabelClass>
+            Rooms
+            <StyledRoomSelect
+              name="roomQuantity"
+              value={roomQuantity}
+              onChange={(e) => {
+                handleChange("roomQuantity", e);
+              }}
+            >
+              <option>All</option>
+              {roomNumChoices.map((quantity) => (
+                <option key={quantity} value={quantity}>
+                  {quantity}
+                </option>
+              ))}
+            </StyledRoomSelect>
+          </StyledLabelClass>
+          <StyledAdultsLabel>
+            Adults
+            <StyledAdultsSelect
+              name="adults"
+              value={adults}
+              onChange={(e) => {
+                handleChange("adults", e);
+              }}
+            >
+              <option>All</option>
+              {adultNumChoices.map((quantity) => (
+                <option key={quantity} value={quantity}>
+                  {quantity}
+                </option>
+              ))}
+            </StyledAdultsSelect>
+          </StyledAdultsLabel>
+        </TopRow>
+        <BottomRow>
+          <StyledForm onSubmit={handleSubmit}>
+            <label>
+              <StyledInput
+                name="cityCode"
+                type="text"
+                value={cityCode}
+                onChange={(e) => {
+                  handleChange("cityCode", e);
+                }}
+                placeholder={"Destination"}
+              />
+            </label>
+
+            <label>
+              <StyledInput
+                name="checkInDate"
+                type="text"
+                value={checkInDate}
+                onChange={(e) => {
+                  handleChange("checkInDate", e);
+                }}
+                placeholder={"CheckInDate"}
+              />
+            </label>
+            <label>
+              <StyledInput
+                name="checkOutDate"
+                type="text"
+                value={checkOutDate}
+                onChange={(e) => {
+                  handleChange("checkOutDate", e);
+                }}
+                placeholder={"CheckOutDate"}
+              />
+            </label>
+
+            <StyledSubmit type="submit" value="Search" />
+          </StyledForm>
+        </BottomRow>
+      </Container>
+    </Wrapper>
+  );
 }
